@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>헤더 메뉴 토글 예제</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <!-- 왼쪽 메뉴 -->
+    <div class="menu">
+      <ul>
+        <li class="menu-item"><a href="#" onclick="toggleSideMenu('sub')">메뉴</a></li>
+      </ul>
+    </div>
+    
+    <!-- 가운데 로고 -->
+    <div class="logo">
+      <h1>My Logo</h1>
+    </div>
+    
+    <!-- 오른쪽 검색, 로그인, 장바구니 -->
+    <div class="header-right">
+      <!-- 검색창 -->
+      <div class="search-box">
+        <button id="search-btn" onclick="toggleSearch()">검색</button>
+        <div id="search-container" class="hidden">
+          <input type="text" id="search-input" placeholder="검색어 입력">
+        </div>
+      </div>
+      <button onclick="toggleSideMenu('login')">로그인</button>
+      <button onclick="toggleSideMenu('cart')">장바구니</button>
+    </div>
+  </div>
+</header>
+
+<!-- 서브 메뉴 (왼쪽에서 나오는 메뉴) -->
+<div id="sub-menu" class="side-menu-left">
+  <button class="left-close-btn" onclick="closeMenu()">닫기</button>
+  <a href="#">서브 메뉴 항목 1</a>
+  <a href="#">서브 메뉴 항목 2</a>
+  <a href="#">서브 메뉴 항목 3</a>
+</div>
+
+<!-- 로그인 메뉴 (오른쪽에서 나오는 메뉴) -->
+<div id="login-menu" class="side-menu-right">
+  <button class="right-close-btn" onclick="closeMenu()">닫기</button>
+  <!-- 비회원 -->
+  <a href="#">로그인</a>
+  <a href="#">주문조회</a>
+  <a href="#">위시리스트</a>
+  <a href="#">최근 본 상품</a>
+  <a href="#">쿠폰</a>
+  <a href="#">적립금</a>
+  <a href="#">예치금</a>
+  <a href="#">회원정보</a>
+  <a href="#">내 게시물</a>
+  <a href="#">배송주소록</a>
+  <!-- 회원 -->
+  <a href="#">로그아웃</a>
+</div>
+
+<!-- 장바구니 메뉴 (오른쪽에서 나오는 메뉴) -->
+<div id="cart-menu" class="side-menu-right">
+  <button class="right-close-btn" onclick="closeMenu()">닫기</button>
+  <a href="#">장바구니 항목 1</a>
+  <a href="#">장바구니 항목 2</a>
+</div>
+
+<footer>
+  <p>Footer Content</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
