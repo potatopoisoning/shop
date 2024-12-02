@@ -4,13 +4,19 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f4f4f4;
+  background-color: white;
+  padding-top: 60px;
 }
 
 header {
   background-color: #000;
   color: white;
   padding: 10px 0;
+  position: fixed; /* 헤더를 고정 */
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* 다른 요소보다 위에 표시 */
 }
 
 .header-container {
@@ -245,11 +251,9 @@ button:focus {
 }
 
 footer {
-  background-color: #222;
+  background-color: #000;
   color: white;
   text-align: center;
   padding: 10px;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
+  /* position: relative;  */
 }
