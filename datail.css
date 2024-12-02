@@ -3,17 +3,18 @@
   .container {
     display: flex;
     margin-top: 100px; /* 고정된 헤더로 인해 상단 여백 추가 */
-    padding: 20px;
+    padding: 0 200px;
+    width: 1500px;
   }
   
   /* 왼쪽 상품 이미지 및 설명 */
   .product-left {
-    width: 60%;
-    padding-right: 20px;
+    width: 900px;
+    padding-right: 160px;
   }
   
   .product-image {
-    width: 100%;
+    width: 900px;
     border-radius: 8px;
   }
   
@@ -23,11 +24,8 @@
   
   /* 오른쪽 상품 정보 및 옵션 */
   .product-right {
-    width: 40%;
+    width: 400px;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: sticky; /* 오른쪽 패널 고정 */
     top: 100px; /* 헤더 아래에 고정 */
   }
