@@ -6,11 +6,43 @@
         <title>쇼핑몰</title>
         <link rel="stylesheet" href="styles.css">
         <script src="script.js"></script>
+        <script>
+            // 페이지 로드 시 자동으로 기존 회원 로그인 폼이 활성화되도록 설정
+            window.onload = function() {
+                toggleActiveButton('existing-member');
+            };
+
+            function toggleActiveButton(buttonId) {
+                // 모든 버튼에서 button-active 클래스 제거
+                document.querySelectorAll(".text-button").forEach(button => {
+                    button.classList.remove("button-active");
+                });
+    
+                // 선택한 버튼에 button-active 클래스 추가
+                document.getElementById(buttonId).classList.add("button-active");
+    
+                // 모든 폼을 숨김
+                document.querySelectorAll(".form-container").forEach(form => {
+                    form.classList.remove("active");
+                });
+    
+                // 선택된 버튼에 따라 폼을 표시
+                if (buttonId === 'existing-member') {
+                    document.getElementById('existing-member-form').classList.add('active');
+                } else if (buttonId === 'non-member') {
+                    document.getElementById('non-member-form').classList.add('active');
+                }
+            }
+    
+            // 초기 상태에서 기존 회원 폼을 표시
+            document.getElementById('existing-member').classList.add('button-active');
+            document.getElementById('existing-member-form').classList.add('active');
+        </script>
         <style>
             .login-container {
               width: 300px;
               text-align: center;
-              margin: 0 auto;
+              margin: 308px  auto;
             }
         
             .login-container h1 {
@@ -21,6 +53,11 @@
             .login-info {
               font-size: 14px;
               margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              background-color: #f4f4f4;
+              border-radius: 50px;
+              width: fit-content;
             }
         
             .login-info a:hover {
@@ -55,6 +92,39 @@
               color: black;
               font-weight: bold;
             }
+        
+            .text-button {
+            background-color: #f4f4f4;
+            color: #aaa;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .button-active {
+            background-color: #000 !important;
+            color: white !important;
+        }
+
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #e0e0e0;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
           </style>
     </head>
     <body>
@@ -121,21 +191,37 @@
         <main>
             <section>
                 <div class="login-container">
+
                     <h1>로그인</h1>
+
                     <div class="login-info">
-                        <span>
-                            <a href="login_user.html">기존 회원이세요? </a>
-                            <a href="login_guest.html"> 비회원 배송조회</a>
-                        </span>
+                        <button class="text-button" id="existing-member" onclick="toggleActiveButton('existing-member')">기존 회원이세요?</button>
+                        <button class="text-button" id="non-member" onclick="toggleActiveButton('non-member')">비회원 배송조회</button>
                     </div>
-                    <form>
-                        <input type="text" placeholder="아이디" required>
-                        <input type="password" placeholder="비밀번호" required>
-                        <button type="submit" class="login-btn">로그인</button>
-                    </form>
+                
+                    <!-- 로그인 -->
+                    <div class="form-container" id="existing-member-form">
+                        <form>
+                            <input type="text" placeholder="아이디" required>
+                            <input type="password" placeholder="비밀번호" required>
+                            <button type="submit" class="login-btn">로그인</button>
+                        </form>
+                    </div>
+                
+                    <!-- 비회원 배송조회 -->
+                    <div class="form-container" id="non-member-form">
+                        <form>
+                            <input type="text" placeholder="주문자명" required>
+                            <input type="text" placeholder="주문번호" required>
+                            <input type="password" placeholder="비회원주문 비밀번호" required>
+                            <button type="submit" class="login-btn">비회원 배송조회</button>
+                        </form>
+                    </div>
+
                     <div class="signup">
                     아직 회원이 아니신가요? <a href="join.html">회원가입</a>
                     </div>
+
                 </div>
             </section>
         </main>

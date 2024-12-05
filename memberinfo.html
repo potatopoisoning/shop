@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>쇼핑몰</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <style>
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .checkbox {
+            border: 1px solid black;
+            padding: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group select {
+            width: 478px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+        .form-group .checkbox-group {
+            display: flex;
+            align-items: center;
+        }
+        .form-group .checkbox-group input {
+            width: auto;
+            margin-right: 5px;
+        }
+        .form-group .checkbox-group label {
+            margin: 0;
+        }
+        .form-footer {
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-footer button {
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 160px;
+            height: 45px;
+        }
+        .form-footer button:hover {
+            background-color: #555;
+        }
+
+.addr_btn{
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+}
+    </style>
+    <body>
+
+    <header>
+        <div class="header-container">
+            <!-- 왼쪽 메뉴 -->
+            <div class="menu">
+                <button onclick="toggleSideMenu('sub')" class="btn">메뉴</button>
+            </div>
+            
+            <!-- 가운데 로고 -->
+            <div class="logo">
+                <a href="index.html"><h1>꿈꾸는 책방</h1></a>
+            </div>
+            
+            <!-- 오른쪽 검색, 로그인, 장바구니 -->
+            <div class="header-right">
+                <!-- 검색창 -->
+                <div class="search-box">
+                    <button id="search-btn" onclick="toggleSearch()" class="btn">검색</button>
+                    <div id="search-container" class="hidden">
+                        <input type="text" id="search-input" placeholder="검색어 입력">
+                    </div>
+                </div>
+                <button onclick="toggleSideMenu('login')" class="btn">로그인</button>
+                <button onclick="toggleSideMenu('cart')" class="btn">장바구니</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 서브 메뉴 (왼쪽에서 나오는 메뉴) -->
+    <div id="sub-menu" class="side-menu-left">
+        <button class="left-close-btn" onclick="closeMenu()">닫기</button>
+        <a href="#">신간 도서</a>
+        <a href="#">베스트셀러</a>
+        <a href="products.html">전체 도서</a>
+        <a href="#">구매 가이드</a>
+        <a href="#">문의하기</a>
+    </div>
+
+    <!-- 로그인 메뉴 (오른쪽에서 나오는 메뉴) -->
+    <div id="login-menu" class="side-menu-right">
+        <button class="right-close-btn" onclick="closeMenu()">닫기</button>
+        <!-- 비회원 -->
+        <a href="login.html">로그인</a>
+        <a href="#">주문조회</a>
+        <a href="#">읽고 싶은 책</a>
+        <a href="#">최근 본 도서</a>
+        <a href="#">회원정보</a>
+        <a href="#">내 게시물</a>
+        <a href="#">배송주소록</a>
+        <!-- 회원 -->
+        <a href="#">로그아웃</a>
+    </div>
+
+    <!-- 장바구니 메뉴 (오른쪽에서 나오는 메뉴) -->
+    <div id="cart-menu" class="side-menu-right">
+        <button class="right-close-btn" onclick="closeMenu()">닫기</button>
+        <a href="#">장바구니 항목 1</a>
+        <a href="#">장바구니 항목 2</a>
+    </div>
+
+    <main>
+        <section>
+            <div class="form-container">
+                <h1>회원정보</h1>
+                <form>
+                    <!-- 기본 정보 -->
+                    <div>
+                        <h3>INFORMATION</h3>
+                        <p >*필수입력사항</p>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="userId" name="userId" value="hong">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" placeholder="비밀번호* (영문 대소문자/숫자/특수문자 조합, 8~16자)">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호 확인*">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" value="홍길동">
+                    </div>
+                    <div class="form-group">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <input type="text" id="addr" name="addr" placeholder="주소" style="width: 73%;">
+                            <button class="addr_btn">우편번호</button>
+                        </div>
+                        <input type="text" id="addr" name="addr" placeholder="기본주소" style="margin-bottom: 15px;">
+                        <input type="text" id="addr" name="addr" placeholder="나머지주소(선택입력가능)">
+                    </div>
+                    <div class="form-group">
+                        <div style="display: flex; justify-content: space-between;">
+                            <select id="phonePrefix" name="phonePrefix" style="width: 30%;">
+                                <option value="010">010</option>
+                                <option value="011">011</option>
+                                <option value="016">016</option>
+                                <option value="016">017</option>
+                                <option value="016">018</option>
+                                <option value="016">019</option>
+                            </select>&nbsp;_&nbsp;
+                            <input type="text" id="phoneMiddle" name="phoneMiddle" style="width: 35%;" value="1234">&nbsp;_&nbsp;
+                            <input type="text" id="phoneLast" name="phoneLast" style="width: 35%;" value="5678">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" value="hong@naver.com">
+                    </div>
+        
+                    <!-- 추가 정보 -->
+                    <!-- <div class="form-group">
+                        <label>성별</label>
+                        <div class="checkbox-group">
+                            <input type="radio" id="male" name="gender" value="male">
+                            <label for="male">남성</label>
+                            <input type="radio" id="female" name="gender" value="female" style="margin-left: 10px;">
+                            <label for="female">여성</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthdate">생년월일</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="birthYear" name="birthYear" placeholder="년" style="width: 33%;">
+                            <input type="text" id="birthMonth" name="birthMonth" placeholder="월" style="width: 33%;">
+                            <input type="text" id="birthDay" name="birthDay" placeholder="일" style="width: 33%;">
+                        </div>
+                    </div> -->
+        
+                    <!-- 버튼 -->
+                    <div class="form-footer">
+                        <button type="submit">회원정보수정</button>
+                        <button type="">취소</button>
+                        <button type="">회원탈퇴</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Footer Content</p>
+    </footer>
+
+    <script src="script.js"></script>
+    </body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+/* 체크박스 숨기기 */
+.checkbox-group input[type="checkbox"] {
+  display: none;
+}
+
+/* 커스텀 체크박스 스타일 */
+.checkboxAll {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* 체크된 상태 스타일 */
+.checkbox-group input[type="checkbox"]:checked + .checkmark {
+  background-color: #4CAF50; /* 체크 시 배경색 */
+  border-color: #4CAF50;
+}
+
+.checkmark::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* 체크 표시 보이기 */
+input[type="checkbox"]:checked + .checkmark::after {
+  opacity: 1;
+}
+
+
+
+        </style>
+    </head>
+    <body>
+      <div class="form-group">
+        <div class="checkbox-group checkbox" style="border-bottom: none;">
+            <label class="checkboxAll">
+                <input type="checkbox" id="checkAll" />
+                <span class="checkmark"></span>
+                이용약관 및 개인정보 수집 이용, 쇼핑정보 수신(선택)에 모두 동의합니다.
+            </label>
+        </div>
+    
+        <div class="checkbox">
+            <div class="checkbox-group">
+                <label class="checkboxAll">
+                    <input type="checkbox" class="check-item" />
+                    <span class="checkmark"></span>
+                    (필수) 이용약관 동의
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <label class="checkboxAll">
+                    <input type="checkbox" class="check-item" />
+                    <span class="checkmark"></span>
+                    (필수) 개인정보 수집 및 이용 동의
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <label class="checkboxAll">
+                    <input type="checkbox" class="check-item" />
+                    <span class="checkmark"></span>
+                    (선택) 마케팅 및 광고 활용 동의
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <label class="checkboxAll">
+                    <input type="checkbox" class="check-item" />
+                    <span class="checkmark"></span>
+                    (선택) SMS 수신 동의
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <label class="checkboxAll">
+                    <input type="checkbox" class="check-item" />
+                    <span class="checkmark"></span>
+                    (선택) 이메일 수신 동의
+                </label>
+            </div>
+        </div>
+    </div>
+    <script>
+      document.getElementById('checkAll').addEventListener('change', function () {
+  const checkItems = document.querySelectorAll('.check-item');
+  checkItems.forEach(item => item.checked = this.checked);
+});
+
+document.querySelectorAll('.check-item').forEach(item => {
+  item.addEventListener('change', function () {
+    const allChecked = document.querySelectorAll('.check-item:checked').length === document.querySelectorAll('.check-item').length;
+    document.getElementById('checkAll').checked = allChecked;
+  });
+});
+
+    </script>
+    
+          
+    </body>
+</html>
