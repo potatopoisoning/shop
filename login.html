@@ -6,43 +6,11 @@
         <title>쇼핑몰</title>
         <link rel="stylesheet" href="styles.css">
         <script src="script.js"></script>
-        <script>
-            // 페이지 로드 시 자동으로 기존 회원 로그인 폼이 활성화되도록 설정
-            window.onload = function() {
-                toggleActiveButton('existing-member');
-            };
-
-            function toggleActiveButton(buttonId) {
-                // 모든 버튼에서 button-active 클래스 제거
-                document.querySelectorAll(".text-button").forEach(button => {
-                    button.classList.remove("button-active");
-                });
-    
-                // 선택한 버튼에 button-active 클래스 추가
-                document.getElementById(buttonId).classList.add("button-active");
-    
-                // 모든 폼을 숨김
-                document.querySelectorAll(".form-container").forEach(form => {
-                    form.classList.remove("active");
-                });
-    
-                // 선택된 버튼에 따라 폼을 표시
-                if (buttonId === 'existing-member') {
-                    document.getElementById('existing-member-form').classList.add('active');
-                } else if (buttonId === 'non-member') {
-                    document.getElementById('non-member-form').classList.add('active');
-                }
-            }
-    
-            // 초기 상태에서 기존 회원 폼을 표시
-            document.getElementById('existing-member').classList.add('button-active');
-            document.getElementById('existing-member-form').classList.add('active');
-        </script>
         <style>
             .login-container {
               width: 300px;
               text-align: center;
-              margin: 308px  auto;
+              margin: 0 auto;
             }
         
             .login-container h1 {
@@ -225,6 +193,50 @@
                 </div>
             </section>
         </main>
+
+        <script>
+            // 페이지 로드 시 자동으로 기존 회원 로그인 폼이 활성화되도록 설정
+            window.onload = function() {
+
+            // 로컬 스토리지에서 저장된 활성화된 버튼을 불러와서 해당 버튼 활성화
+            var activeButtonId = localStorage.getItem('activeButtonId');
+            if (activeButtonId) {
+                toggleActiveButton(activeButtonId);
+            } else {
+                toggleActiveButton('order-list');  // 기본 값으로 '주문 목록' 버튼 활성화
+            }
+            };
+
+            function toggleActiveButton(buttonId) {
+
+                // 로컬 스토리지에 클릭된 버튼 ID 저장
+                localStorage.setItem('activeButtonId', buttonId);
+
+                // 모든 버튼에서 button-active 클래스 제거
+                document.querySelectorAll(".text-button").forEach(button => {
+                    button.classList.remove("button-active");
+                });
+    
+                // 선택한 버튼에 button-active 클래스 추가
+                document.getElementById(buttonId).classList.add("button-active");
+    
+                // 모든 폼을 숨김
+                document.querySelectorAll(".form-container").forEach(form => {
+                    form.classList.remove("active");
+                });
+    
+                // 선택된 버튼에 따라 폼을 표시
+                if (buttonId === 'existing-member') {
+                    document.getElementById('existing-member-form').classList.add('active');
+                } else if (buttonId === 'non-member') {
+                    document.getElementById('non-member-form').classList.add('active');
+                }
+            }
+    
+            // 초기 상태에서 기존 회원 폼을 표시
+            document.getElementById('existing-member').classList.add('button-active');
+            document.getElementById('existing-member-form').classList.add('active');
+        </script>
 
         <footer>
             <p>Footer Content</p>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>회원 정보</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+              .wish-container {
+                  width: 900px; 
+                  margin: 0 auto;
+                  text-align: center;
+                }
+                
+                .wish-list h2{
+                    margin-top: 0;
+                }
+                
+                .wish-list{
+                    text-align: left;
+                    border: 1px solid black;
+                    padding: 20px;
+                }
+                
+                .wish-container .wish-list:last-of-type:not(:only-of-type) {
+                    border-top: none;  /* border-top 제거 */
+                }
+
+                .wish-list:last-child {
+                    margin-bottom: 20px;         /* 아래쪽 여백 추가 */
+                }
+
+                .book-info{
+                    width: 100%;
+                    margin-left: 20px;
+                    display: flex;
+                    justify-content: space-between; 
+                }
+
+                .imgs{
+                    display: flex;
+                    justify-content: flex-end; 
+                    gap: 5px;
+                }
+                
+                .imgs img{
+                    width: 40px;
+                    height: 40px;
+                }
+
+                .wish-item{
+                    display: flex;
+                    /* justify-content: space-between;  */
+                    /* margin-bottom: 30px; */
+                }
+        </style>
+    </head>
+    <body>
+
+    <header>
+        <div class="header-container">
+        <!-- 왼쪽 메뉴 -->
+        <div class="menu">
+            <button onclick="toggleSideMenu('sub')" class="btn">메뉴</button>
+        </div>
+        
+        <!-- 가운데 로고 -->
+        <div class="logo">
+            <a href="index.html"><h1>꿈꾸는 책방</h1></a>
+        </div>
+        
+        <!-- 오른쪽 검색, 로그인, 장바구니 -->
+        <div class="header-right">
+            <!-- 검색창 -->
+            <div class="search-box">
+            <button id="search-btn" onclick="toggleSearch()" class="btn">검색</button>
+            <div id="search-container" class="hidden">
+                <input type="text" id="search-input" placeholder="검색어 입력">
+            </div>
+            </div>
+            <button onclick="toggleSideMenu('login')" class="btn">로그인</button>
+            <button onclick="toggleSideMenu('cart')" class="btn">장바구니</button>
+        </div>
+        </div>
+    </header>
+    
+    <!-- 서브 메뉴 (왼쪽에서 나오는 메뉴) -->
+    <div id="sub-menu" class="side-menu-left">
+        <button class="left-close-btn" onclick="closeMenu()">닫기</button>
+        <a href="#">신간 도서</a>
+        <a href="#">베스트셀러</a>
+        <a href="products.html">전체 도서</a>
+        <a href="#">구매 가이드</a>
+        <a href="#">문의하기</a>
+    </div>
+    
+    <!-- 로그인 메뉴 (오른쪽에서 나오는 메뉴) -->
+    <div id="login-menu" class="side-menu-right">
+        <button class="right-close-btn" onclick="closeMenu()">닫기</button>
+        <!-- 비회원 -->
+        <a href="login.html">로그인</a>
+        <a href="#">주문조회</a>
+        <a href="#">읽고 싶은 책</a>
+        <a href="#">최근 본 도서</a>
+        <a href="#">회원정보</a>
+        <a href="#">내 게시물</a>
+        <a href="#">배송주소록</a>
+        <!-- 회원 -->
+        <a href="#">로그아웃</a>
+    </div>
+    
+    <!-- 장바구니 메뉴 (오른쪽에서 나오는 메뉴) -->
+    <div id="cart-menu" class="side-menu-right">
+        <button class="right-close-btn" onclick="closeMenu()">닫기</button>
+        <a href="#">장바구니 항목 1</a>
+        <a href="#">장바구니 항목 2</a>
+    </div>
+
+    <main>
+        <section>
+            <div class="wish-container">
+                <h2>읽고 싶은 책</h2>
+                <div class="wish-list">
+                    <div class="wish-item">
+                        <div>
+                            <img src="채식주의자.jpg" style="width: 120px;">
+                        </div>
+                        <div class="book-info">
+                            <div>
+                                <span>채식주의자</span><br>
+                                <span>한강 저 · 창비</span><br>
+                                <span>
+                                    평균 <img src="https://img.icons8.com/?size=100&id=G4zH9X90bt1j&format=png&color=FFAA00" style="width: 20px;">3(1398)
+                                </span><br><br><br><br><br><br>
+                                <span>13,500</span>
+                            </div>
+                            <div class="imgs">
+                                <img src="https://img.icons8.com/?size=100&id=TgHJI44zOCgU&format=png&color=000000">
+                                <img src="https://img.icons8.com/?size=100&id=N14RzApVhZPG&format=png&color=000000">
+                                <img src="https://img.icons8.com/?size=100&id=HjmbF5xvIBpl&format=png&color=000000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wish-list">
+                    <div class="wish-item">
+                        <div>
+                            <img src="소년이 온다.jpg" style="width: 120px;">
+                        </div>
+                        <div class="book-info">
+                            <div>
+                                <span>소년이 온다</span><br>
+                                <span>한강 저 · 창비</span><br>
+                                <span>
+                                    평균 <img src="https://img.icons8.com/?size=100&id=G4zH9X90bt1j&format=png&color=FFAA00" style="width: 20px;">3(1398)
+                                </span><br><br><br><br><br><br>
+                                <span>13,500</span>
+                            </div>
+                            <div class="imgs">
+                                <img src="https://img.icons8.com/?size=100&id=TgHJI44zOCgU&format=png&color=000000">
+                                <img src="https://img.icons8.com/?size=100&id=N14RzApVhZPG&format=png&color=000000">
+                                <img src="https://img.icons8.com/?size=100&id=HjmbF5xvIBpl&format=png&color=000000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Footer Content</p>
+    </footer>
+
+    </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 리뷰 보기</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>내가 작성한 리뷰</h1>
+    <table id="reviewTable">
+        <thead>
+            <tr>
+                <th>리뷰 번호</th>
+                <th>상품 이름</th>
+                <th>작성일</th>
+                <th>평점</th>
+                <th>내용</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 데이터가 여기에 추가됩니다 -->
+        </tbody>
+    </table>
+    <script>
+        window.onload = function () {
+    fetchReviews();
+};
+
+function fetchReviews() {
+    // 서버에서 리뷰 데이터를 가져옵니다
+    fetch('/api/my-reviews') // 백엔드에서 제공하는 API
+        .then(response => response.json())
+        .then(data => populateTable(data))
+        .catch(error => console.error('리뷰 데이터를 가져오는 중 오류 발생:', error));
+}
+
+function populateTable(reviews) {
+    const tableBody = document.querySelector('#reviewTable tbody');
+    reviews.forEach(review => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${review.reviewId}</td>
+            <td>${review.productName}</td>
+            <td>${review.createdDate}</td>
+            <td>${review.rating}</td>
+            <td>${review.content}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+    </script>
+</body>
+</html>

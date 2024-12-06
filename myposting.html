@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>회원 정보</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+              .post-container {
+                  width: 900px; 
+                  margin: 0 auto;
+                  text-align: center;
+                }
+                
+                .post-container h2{
+                    margin-top: 0;
+                }
+                
+                .post-search{
+                    text-align: left;
+                    border: 1px solid black;
+                    padding: 20px;
+                    margin-bottom: 20px;
+
+                }
+
+                .date-btn a{
+                    display: inline-block;
+                    border: 1px solid black;
+                    padding: 10px;
+                    /* height: 40px; */
+                }
+                
+                .post-search select, .post-search input {
+                    padding: 5px;
+                    border-radius: 0;
+                    border: 1px solid black;
+                }
+
+                button {
+                    color: white;
+                    border: none;
+                    padding: 10px 15px;
+                    cursor: pointer;
+                    border: 1px solid black;
+                    background-color: black;
+                }
+                
+                input{
+                    height: 28px; /* 원하는 높이로 설정 */
+                }
+
+                .review-type-button{
+                    border: none;
+                    background-color: white;
+                    color: black;
+                }
+
+                .button-active {
+                    text-decoration: underline;
+                    font-weight: bold;
+                }
+
+                .form-container {
+                    display: none;
+                }
+
+                .form-container.active {
+                    display: block;
+                }
+
+                .ask-list, .review-list-form {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                }
+                .ask-list, .review-list-form, th, td {
+                    border: 1px solid black;
+                }
+                th, td {
+                    padding: 10px;
+                    text-align: center;
+                }
+
+                .ask-list img, .review-list-form img{
+                    width: 20px;
+                }
+
+                .review-possible-form {
+                    border: 1px solid black;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 20px;
+                    text-align: left;
+                }
+
+                .review-possible-form img {
+                    width: 80px;
+                    margin-right: 10PX;
+                }
+
+                .review-possible-form p {
+                    margin: 0;
+                }
+
+                .review-register-btn{
+                    border: 1px solid black;
+                    padding: 15px;
+                    background-color: white;
+                    color: black;
+                    margin: 20px 0 5px 0;
+                    font-size: 16px;
+                }
+
+                .register-date{
+                    font-size: 10px;
+                }
+        </style>
+    </head>
+    <body>
+
+    <header>
+        <div class="header-container">
+        <!-- 왼쪽 메뉴 -->
+        <div class="menu">
+            <button onclick="toggleSideMenu('sub')" class="btn">메뉴</button>
+        </div>
+        
+        <!-- 가운데 로고 -->
+        <div class="logo">
+            <a href="index.html"><h1>꿈꾸는 책방</h1></a>
+        </div>
+        
+        <!-- 오른쪽 검색, 로그인, 장바구니 -->
+        <div class="header-right">
+            <!-- 검색창 -->
+            <div class="search-box">
+            <button id="search-btn" onclick="toggleSearch()" class="btn">검색</button>
+            <div id="search-container" class="hidden">
+                <input type="text" id="search-input" placeholder="검색어 입력">
+            </div>
+            </div>
+            <button onclick="toggleSideMenu('login')" class="btn">로그인</button>
+            <button onclick="toggleSideMenu('cart')" class="btn">장바구니</button>
+        </div>
+        </div>
+    </header>
+    
+    <!-- 서브 메뉴 (왼쪽에서 나오는 메뉴) -->
+    <div id="sub-menu" class="side-menu-left">
+        <button class="left-close-btn" onclick="closeMenu()">닫기</button>
+        <a href="#">신간 도서</a>
+        <a href="#">베스트셀러</a>
+        <a href="products.html">전체 도서</a>
+        <a href="#">구매 가이드</a>
+        <a href="#">문의하기</a>
+    </div>
+    
+    <!-- 로그인 메뉴 (오른쪽에서 나오는 메뉴) -->
+    <div id="login-menu" class="side-menu-right">
+        <button class="right-close-btn" onclick="closeMenu()">닫기</button>
+        <!-- 비회원 -->
+        <a href="login.html">로그인</a>
+        <a href="#">주문조회</a>
+        <a href="#">읽고 싶은 책</a>
+        <a href="#">최근 본 도서</a>
+        <a href="#">회원정보</a>
+        <a href="#">내 게시물</a>
+        <a href="#">배송주소록</a>
+        <!-- 회원 -->
+        <a href="#">로그아웃</a>
+    </div>
+    
+    <!-- 장바구니 메뉴 (오른쪽에서 나오는 메뉴) -->
+    <div id="cart-menu" class="side-menu-right">
+        <button class="right-close-btn" onclick="closeMenu()">닫기</button>
+        <a href="#">장바구니 항목 1</a>
+        <a href="#">장바구니 항목 2</a>
+    </div>
+
+    <main>
+        <section>
+            <div class="post-container">
+                <h2>주문조회</h2>
+
+                <div>
+                    <div class="post-search">
+                        <div class="date-btn">
+                            <a href="javascript:void(0);" onclick="setDates('today')">오늘</a>
+                            <a href="javascript:void(0);" onclick="setDates('1week')">1주일</a>
+                            <a href="javascript:void(0);" onclick="setDates('1month')">1개월</a>
+                            <a href="javascript:void(0);" onclick="setDates('3months')">3개월</a>
+                            <a href="javascript:void(0);" onclick="setDates('6months')">6개월</a>
+                            <input type="date">~<input type="date">
+                            <button onclick="location.href='addrmodify.html'">조회</button>
+                        </div>
+                    </div>
+                    
+                    <div class="ask">
+                        <h1>1:1 문의내역</h1>
+                        <table class="ask-list">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20px;">번호</th>
+                                    <th style="width: 70px;">문의유형</th>
+                                    <th style="width: 300px;">내용</th>
+                                    <th style="width: 80px;">작성자</th>
+                                    <th style="width: 70px;">작성일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2</td>
+                                    <td>상품문의</td>
+                                    <td>
+                                        <img src="http://img0001.echosting.cafe24.com/front/type_b/image/common/icon_re.gif" alt="답변" class="ec-common-rwd-image">
+                                        <!-- <img src="http://img0001.echosting.cafe24.com/front/type_b/image/common/icon_lock.gif" alt="비밀글" class="ec-common-rwd-image"> -->
+                                        <img src="https://img.icons8.com/?size=100&id=5hmx7LpaoQeJ&format=png&color=000000"> 답변완료
+                                    </td>
+                                    <td>홍길동</td>
+                                    <td>2024.12.03</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>상품문의</td>
+                                    <td>
+                                        <img src="https://img.icons8.com/?size=100&id=5hmx7LpaoQeJ&format=png&color=000000"> [상품문의]
+                                    </td>
+                                    <td>홍길동</td>
+                                    <td>2024.12.03</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="review">
+                        <div class="order-type">
+                            <button class="review-type-button" id="review-list" onclick="toggleActiveButton('review-list')"><h1>작성 가능한 리뷰(0)</h1></button>
+                            <button class="review-type-button" id="review-possible" onclick="toggleActiveButton('review-possible')"><h1>내가 작성한 리뷰(0)</h1></button>
+                        </div>
+                        
+                        <table class="review-list-form form-container" id="review-list-form">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20px;">번호</th>
+                                    <th style="width: 100px;">상품 이름</th>
+                                    <th style="width: 70px;">평점</th>
+                                    <th style="width: 200px;">내용</th>
+                                    <th style="width: 70px;">작성일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>채식주의자</td>
+                                    <td>
+                                        <img src="https://img.icons8.com/?size=100&id=G4zH9X90bt1j&format=png&color=FFAA00" style="width: 20px;">
+                                        <img src="https://img.icons8.com/?size=100&id=G4zH9X90bt1j&format=png&color=FFAA00" style="width: 20px;">
+                                        <img src="https://img.icons8.com/?size=100&id=G4zH9X90bt1j&format=png&color=FFAA00" style="width: 20px;">
+                                        <img src="https://img.icons8.com/?size=100&id=G4zH9X90bt1j&format=png&color=FFAA00" style="width: 20px;">
+                                        <img src="https://img.icons8.com/?size=100&id=G4zH9X90bt1j&format=png&color=FFAA00" style="width: 20px;">
+                                    </td>
+                                    <td>감동</td>
+                                    <td>2024.12.03</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="review-possible-form form-container" id="review-possible-form">
+                            <div style="display: flex;">
+                                <img src="소년이 온다.jpg">
+                                <div>
+                                    <p><b>소년이 온다</b></p><br><br><br><br>
+                                    <p>2024.12.03에 구매하신 상품입니다.</p>
+                                </div>
+                            </div>
+                            <div>
+                                <button href="" class="review-register-btn">리뷰 작성하기</button>
+                                <br>
+                                <p class="register-date">작성기한 : 2024.12.10(D-7)</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Footer Content</p>
+    </footer>
+
+    </body>
+    <script>
+        window.onload = function() {
+
+            // 로컬 스토리지에서 저장된 활성화된 버튼을 불러와서 해당 버튼 활성화
+            var activeButtonId = localStorage.getItem('activeButtonId');
+            if (activeButtonId) {
+                toggleActiveButton(activeButtonId);
+            } else {
+                toggleActiveButton('review-list');  // 기본 값으로 '주문 목록' 버튼 활성화
+            }
+
+            // 오늘 날짜를 구하기
+            var today = new Date();
+            var todayString = today.toISOString().split('T')[0]; // 'YYYY-MM-DD' 형식으로 변환
+    
+            // 3개월 전 날짜 구하기
+            var threeMonthsAgo = new Date(today);
+            threeMonthsAgo.setMonth(today.getMonth() - 3);
+            var threeMonthsAgoString = threeMonthsAgo.toISOString().split('T')[0]; // 'YYYY-MM-DD' 형식으로 변환
+    
+            // 날짜 값을 input 요소에 설정
+            document.querySelectorAll('input[type="date"]')[0].value = threeMonthsAgoString; // 첫 번째 date input
+            document.querySelectorAll('input[type="date"]')[1].value = todayString; // 두 번째 date input
+        };
+
+        function toggleActiveButton(buttonId) {
+
+        //         // 로컬 스토리지에 클릭된 버튼 ID 저장
+                localStorage.setItem('activeButtonId', buttonId);
+
+        //         // 모든 버튼에서 button-active 클래스 제거
+                document.querySelectorAll(".review-type-button").forEach(button => {
+                    button.classList.remove("button-active");
+                });
+    
+        //         // 선택한 버튼에 button-active 클래스 추가
+                document.getElementById(buttonId).classList.add("button-active");
+    
+        //         // 모든 폼을 숨김
+                document.querySelectorAll(".form-container").forEach(form => {
+                    form.classList.remove("active");
+                });
+    
+        //         // 선택된 버튼에 따라 폼을 표시
+                if (buttonId === 'review-list') {
+                    document.getElementById('review-list-form').classList.add('active');
+                } else if (buttonId === 'review-possible') {
+                    document.getElementById('review-possible-form').classList.add('active');
+                }
+            }
+    
+            // // 초기 상태에서 기존 회원 폼을 표시
+            document.getElementById('review-list').classList.add('button-active');
+            document.getElementById('review-list-form').classList.add('active');
+
+
+        function setDates(range) {
+        var today = new Date();
+        var todayString = today.toISOString().split('T')[0]; // 'YYYY-MM-DD' 형식으로 변환
+        var startDate, endDate;
+
+        // 날짜 범위에 맞게 설정
+        if (range === 'today') {
+            // 오늘 날짜로 설정
+            startDate = todayString;
+            endDate = todayString;
+        } else if (range === '1week') {
+            // 1주일 전 날짜로 설정
+            var oneWeekAgo = new Date(today);
+            oneWeekAgo.setDate(today.getDate() - 7);
+            startDate = oneWeekAgo.toISOString().split('T')[0];
+            endDate = todayString;
+        } else if (range === '1month') {
+            // 1개월 전 날짜로 설정
+            var oneMonthAgo = new Date(today);
+            oneMonthAgo.setMonth(today.getMonth() - 1);
+            startDate = oneMonthAgo.toISOString().split('T')[0];
+            endDate = todayString;
+        } else if (range === '3months') {
+            // 3개월 전 날짜로 설정
+            var threeMonthsAgo = new Date(today);
+            threeMonthsAgo.setMonth(today.getMonth() - 3);
+            startDate = threeMonthsAgo.toISOString().split('T')[0];
+            endDate = todayString;
+        } else if (range === '6months') {
+            // 3개월 전 날짜로 설정
+            var threeMonthsAgo = new Date(today);
+            threeMonthsAgo.setMonth(today.getMonth() - 6);
+            startDate = threeMonthsAgo.toISOString().split('T')[0];
+            endDate = todayString;
+        }
+
+        // 첫 번째 date input에 시작 날짜 설정
+        document.querySelectorAll('input[type="date"]')[0].value = startDate;
+        // 두 번째 date input에 종료 날짜 설정
+        document.querySelectorAll('input[type="date"]')[1].value = endDate;
+    }
+    </script>
+    
+</html>
